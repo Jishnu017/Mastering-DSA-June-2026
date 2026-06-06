@@ -1,0 +1,28 @@
+//3751. Total Waviness of Numbers in Range I
+
+class Solution {
+    int waviness(int num){
+        int cnt=0;
+        int last=num%10;
+        num=num/10;
+        int curr=num%10;
+        num=num/10;
+
+        while(num>0){
+            int next=num%10;
+            num=num/10;
+            if(curr>next&&curr>last || curr<next&&curr<last) cnt++;
+            last=curr;
+            curr=next;
+        }
+        return cnt;
+    }
+    public int totalWaviness(int num1, int num2) {
+        int ans=0;
+        for(int i=num1;i<=num2;i++){
+            if(i<100) continue;
+            ans+=waviness(i);
+        }
+        return ans;
+    }
+}
